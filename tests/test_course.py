@@ -37,9 +37,10 @@ class CourseLabTests(unittest.TestCase):
     def test_capstone_and_idempotency(self):
         result = course.capstone()
         self.assertEqual(result["hotel"]["decision"], "keep")
-        self.assertEqual(result["ticket"]["decision"], "traveler_C_misses_start")
+        self.assertEqual(result["ticket"]["decision"], "traveler_B_misses_start")
         self.assertEqual(result["simulated_writes"], 1)
+        self.assertEqual(course.capstone(other_guests=0)["hotel"]["decision"], "review_checkin")
         self.assertEqual(result["dry_run"], ["needs_approval", "applied", "already_applied"])
         booking = course.SimulatedBooking()
-        self.assertEqual(booking.change_dinner(2, True, "id"), "applied")
-        self.assertEqual(booking.change_dinner(3, True, "id"), "key_conflict")
+        self.assertEqual(booking.change_dinner(1, True, "id"), "applied")
+        self.assertEqual(booking.change_dinner(2, True, "id"), "key_conflict")

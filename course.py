@@ -116,21 +116,21 @@ class SimulatedBooking:
             return "needs_approval"
         if key in self.actions:
             return "already_applied" if self.actions[key] == guests else "key_conflict"
-        if guests not in (2, 3):
+        if guests not in (1, 2):
             return "invalid_guest_count"
         self.actions[key] = guests
         return "applied"
 
 
-def capstone(arrival_day=6, arrival_hour=10, other_guests=2):
+def capstone(arrival_day=6, arrival_hour=10, other_guests=1):
     booking = SimulatedBooking()
     return {
         "dinner": {"decision": "review_party_size" if arrival_day > 5 or arrival_hour >= 19 else "keep", "sources": ["D9", "D12"]},
         "hotel": {"decision": "keep" if other_guests else "review_checkin", "sources": ["D10", "D12"]},
-        "ticket": {"decision": "traveler_C_misses_start" if (arrival_day, arrival_hour) >= (6, 9) else "check_transfer_time", "sources": ["D11", "D12"]},
-        "dry_run": [booking.change_dinner(2, False, "trip-dinner"),
-                    booking.change_dinner(2, True, "trip-dinner"),
-                    booking.change_dinner(2, True, "trip-dinner")],
+        "ticket": {"decision": "traveler_B_misses_start" if (arrival_day, arrival_hour) >= (6, 9) else "check_transfer_time", "sources": ["D11", "D12"]},
+        "dry_run": [booking.change_dinner(1, False, "trip-dinner"),
+                    booking.change_dinner(1, True, "trip-dinner"),
+                    booking.change_dinner(1, True, "trip-dinner")],
         "simulated_writes": len(booking.actions),
     }
 
