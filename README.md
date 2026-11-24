@@ -6,12 +6,12 @@
 
 | 週 | 正課 | 實驗 |
 |---|---|---|
-| 1–2 | [文件、語音與流程探勘](lectures/01.md) | [現場證據](labs/01/) |
-| 3–4 | [資訊萃取與專家校對](lectures/02.md) | [審核佇列](labs/02/) |
-| 5–6 | [規則、圖譜、時間與壓縮](lectures/03.md) | [延誤影響](labs/03/) |
-| 7–8 | [資訊檢索與 RAG](lectures/04.md) | [證據排名](labs/04/) |
-| 9–10 | [評估與能力邊界](lectures/05.md) | [錯誤診斷](labs/05/) |
-| 11–12 | [持續學習與執行控制](lectures/06.md) | [出發前改航班](labs/06/) |
+| 1–2 | [文件、語音與流程探勘](lectures/chapter1/intro.md) | [現場證據](labs/01/) |
+| 3–4 | [資訊萃取與專家校對](lectures/chapter2/intro.md) | [審核佇列](labs/02/) |
+| 5–6 | [規則、圖譜、時間與壓縮](lectures/chapter3/intro.md) | [延誤影響](labs/03/) |
+| 7–8 | [資訊檢索與 RAG](lectures/chapter4/intro.md) | [證據排名](labs/04/) |
+| 9–10 | [評估與能力邊界](lectures/chapter5/intro.md) | [錯誤診斷](labs/05/) |
+| 11–12 | [持續學習與執行控制](lectures/chapter6/intro.md) | [出發前改航班](labs/06/) |
 
 ## 開始
 
