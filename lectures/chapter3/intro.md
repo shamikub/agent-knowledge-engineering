@@ -22,3 +22,9 @@ Bitemporal 記 valid time 與 transaction time。例如取消政策 4/1 起有�
 練習。畫出延誤 → 入住、入住 → 換房的兩條邊，補效期與來源，再查兩跳影響。加一個環並說明遍歷如何終止。
 
 閱讀：[DMN](https://www.omg.org/dmn/)、[SHACL](https://www.w3.org/TR/shacl/)、[PROV-O](https://www.w3.org/TR/prov-o/)、[RAPTOR](https://arxiv.org/abs/2401.18059)、[LongLLMLingua](https://arxiv.org/abs/2310.06839)。前沿作業比較兩種壓縮方法，排齊 token 預算、回答模型和任務。
+
+## 延伸閱讀關鍵字
+
+- **先讀**：DMN hit policies、FEEL null semantics、SHACL closed shapes、SPARQL property paths。沿著同一筆入住案例比較表格、約束與圖查詢。
+- **再讀**：W3C PROV-O wasDerivedFrom、bitemporal valid time transaction time、recursive CTE cycle detection。查如何重播助理在某天能看到的版本。
+- **研究入口**：RAPTOR hierarchical retrieval、LongLLMLingua context compression、fact retention。查如何在相同 token 預算下比較例外條件保留率。

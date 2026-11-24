@@ -19,3 +19,9 @@ Snorkel 的 labeling functions 可以標類別或 abstain，label model 用多�
 練習。若兩種抽樣各審 10 筆，分別抓 6 筆和 2 筆錯，哪一組可以估全庫錯誤率？若審核時間差一倍怎麼比？
 
 閱讀：[Snorkel](https://arxiv.org/abs/1711.10160)、[Core-set active learning](https://arxiv.org/abs/1708.00489)、[ACE 2005](https://catalog.ldc.upenn.edu/LDC2006T06)。前沿作業找一篇事件抽取論文，核對分數是 trigger 還是 argument，以及採用何種資料切分。
+
+## 延伸閱讀關鍵字
+
+- **先讀**：BIO tagging、linear-chain CRF、Viterbi decoding、event argument extraction。練習解釋為何實體抓對了，事件仍可能連錯。
+- **再讀**：Snorkel data programming、labeling function dependency、Query by Committee、core-set active learning。比較相同審核預算下各能發現哪些錯誤。
+- **實務入口**：Critical Decision Method、Label Studio pre-annotations、inter-annotator agreement。查怎麼設計一張讓專家快速裁定的審核卡。

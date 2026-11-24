@@ -19,3 +19,9 @@ Selective prediction 允許 abstain。Coverage=放行數/總案件數。Selectiv
 練習。100 筆中放行 80 筆錯 8 筆，另一門檻放行 60 筆錯 3 筆。計算兩點並寫出選門檻需要的成本資訊。
 
 閱讀：[ALCE](https://arxiv.org/abs/2305.14627)、[Lost in the Middle](https://arxiv.org/abs/2307.03172)、[Conformal Risk Control](https://arxiv.org/abs/2208.02814)。前沿作業找一份有拒答能力的 benchmark，核對不可回答標記與評分如何算。
+
+## 延伸閱讀關鍵字
+
+- **先讀**：Oracle Retrieval ablation、ALCE citation support、counterfactual RAG evaluation。找出如何控制證據，分辨檢索與下游判斷錯誤。
+- **再讀**：selective classification AURC、reliability diagram、Brier score、Conformal Risk Control exchangeability。查可接受的轉人工門檻怎麼在盲測前選定。
+- **實務入口**：slice-based evaluation、grouped train-test split、Langfuse trace to dataset。練習把一次錯答變成可重跑的測試。

@@ -20,3 +20,9 @@ Constrained decoding 限定輸出結構。OPA／Cedar 用政策決定動作是�
 練習。玩家因改航班晚到，問了兩次是否要改晚餐。設計同 key 同參數和同 key 不同參數的預期結果，再畫狀態轉移。
 
 閱讀：[DAgger](https://proceedings.mlr.press/v15/ross11a.html)、[LoRA](https://arxiv.org/abs/2106.09685)、[QLoRA](https://arxiv.org/abs/2305.14314)、[Knowledge Distillation](https://arxiv.org/abs/1503.02531)、[OPA](https://www.openpolicyagent.org/docs/)。前沿作業挑一個小模型評估，核對語言、延遲硬體、量化設定和場景是否可重現。
+
+## 延伸閱讀關鍵字
+
+- **先讀**：DAgger covariate shift、continual learning replay、catastrophic forgetting。比較更新知識、策略與權重分別解哪種錯。
+- **再讀**：LoRA rank ablation、QLoRA NF4、knowledge distillation temperature。查小模型的品質、延遲和成本怎麼對照。
+- **實務入口**：OPA policy testing、Cedar authorization、idempotency key semantics、shadow deployment。驗證重送、權限和發版行為。

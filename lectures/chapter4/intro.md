@@ -19,3 +19,9 @@
 
 ## 參考閱讀
 閱讀：[DPR](https://arxiv.org/abs/2004.04906)、[SPLADE](https://arxiv.org/abs/2107.05720)、[E5](https://arxiv.org/abs/2212.03533)、[ColBERTv2](https://arxiv.org/abs/2112.01488)、[BEIR](https://arxiv.org/abs/2104.08663)、[MIRACL](https://arxiv.org/abs/2210.09984)。前沿作業挑一個語言與固定切分，核對候選模型、reranker 和訓練資料。
+
+## 延伸閱讀關鍵字
+
+- **先讀**：Lucene BM25Similarity、SPLADE vocabulary expansion、E5 query passage prefixes、ColBERT MaxSim。比較各方法在哪一層做匹配。
+- **再讀**：cross-encoder reranking、RRF rank fusion、HNSW recall latency、filtered ANN。查同一個 k 和同一批候選下如何公平比較。
+- **研究入口**：BEIR zero-shot retrieval、MIRACL zh qrels、multi-hop evidence retrieval。追查高 nDCG 是否代表主條款與例外都找齊。
