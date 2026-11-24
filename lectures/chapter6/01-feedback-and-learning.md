@@ -1,5 +1,7 @@
 # 6.1 一次人工改判能更新哪一層
 
+[← 上一頁](intro.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](02-fine-tuning-and-distillation.md)
+
 ## 學習目標
 
 完成本節後，你能夠：
@@ -428,4 +430,4 @@ def check_release(eval_results: dict) -> bool:
 
 ---
 
-[章節導覽](intro.md) · [下一節](02-fine-tuning-and-distillation.md)
+[← 上一頁](intro.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](02-fine-tuning-and-distillation.md)

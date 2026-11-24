@@ -1,5 +1,7 @@
 # 4.3 稠密檢索：向量如何表達語意
 
+[← 上一頁](02-sparse-retrieval.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](04-reranking-and-fusion.md)
+
 ## 學習目標
 
 讀完本節後，你應該能：
@@ -297,4 +299,4 @@ Dot product：d₄（=10）> d₃（=1）；Cosine：d₃ = d₄ = 1.0（排名�
 
 ---
 
-[章節導覽](intro.md) · [上一節](02-sparse-retrieval.md) · [下一節](04-reranking-and-fusion.md)
+[← 上一頁](02-sparse-retrieval.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](04-reranking-and-fusion.md)

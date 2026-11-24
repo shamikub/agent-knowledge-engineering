@@ -1,6 +1,8 @@
 # 持續學習、模型選擇與行為控制
 
-[課程首頁](../../README.md) · [Lab 06](../../labs/06/README.md)
+[← 上一頁](../chapter5/04-calibration-and-abstention.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](01-feedback-and-learning.md)
+
+[本章 Lab](../../labs/06/README.md)
 
 ## 本章小節
 
@@ -26,3 +28,5 @@ Constrained decoding 限定輸出結構。OPA／Cedar 用政策決定動作是�
 - **先讀**：DAgger covariate shift、continual learning replay、catastrophic forgetting。比較更新知識、策略與權重分別解哪種錯。
 - **再讀**：LoRA rank ablation、QLoRA NF4、knowledge distillation temperature。查小模型的品質、延遲和成本怎麼對照。
 - **實務入口**：OPA policy testing、Cedar authorization、idempotency key semantics、shadow deployment。驗證重送、權限和發版行為。
+
+[← 上一頁](../chapter5/04-calibration-and-abstention.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](01-feedback-and-learning.md)

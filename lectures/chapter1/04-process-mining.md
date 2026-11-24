@@ -1,5 +1,7 @@
 # 1.3 從軌跡到流程樹
 
+[← 上一頁](03-ui-operations.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](../chapter2/intro.md)
+
 ## 學習目標
 
 完成本節後，你應能：
@@ -415,4 +417,4 @@ Inductive Miner 會偵測到：
 
 ---
 
-[章節導覽](intro.md) · [上一節](03-ui-operations.md)
+[← 上一頁](03-ui-operations.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](../chapter2/intro.md)

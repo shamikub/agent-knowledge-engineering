@@ -1,6 +1,8 @@
 # 評估、錯誤診斷與能力邊界
 
-[課程首頁](../../README.md) · [Lab 05](../../labs/05/README.md)
+[← 上一頁](../chapter4/06-exercises.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](01-evaluation-datasets.md)
+
+[本章 Lab](../../labs/05/README.md)
 
 ## 本章小節
 
@@ -30,3 +32,5 @@ Selective prediction 允許 abstain。Coverage=放行數/總案件數。Selectiv
 - **先讀**：Oracle Retrieval ablation、ALCE citation support、counterfactual RAG evaluation。找出如何控制證據，分辨檢索與下游判斷錯誤。
 - **再讀**：selective classification AURC、reliability diagram、Brier score、Conformal Risk Control exchangeability。查可接受的轉人工門檻怎麼在盲測前選定。
 - **實務入口**：slice-based evaluation、grouped train-test split、Langfuse trace to dataset。練習把一次錯答變成可重跑的測試。
+
+[← 上一頁](../chapter4/06-exercises.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](01-evaluation-datasets.md)

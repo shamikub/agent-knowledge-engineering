@@ -1,5 +1,7 @@
 # 6.4 發版前重播
 
+[← 上一頁](03-execution-control.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [期末 Lab →](../../labs/06/README.md)
+
 ## 學習目標
 
 完成本節後，你能夠：
@@ -486,4 +488,4 @@ HOTEL_RECOMMENDATION_CASES = [
 
 ---
 
-[章節導覽](intro.md) · [上一節](03-execution-control.md)
+[← 上一頁](03-execution-control.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [期末 Lab →](../../labs/06/README.md)

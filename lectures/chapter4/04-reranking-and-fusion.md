@@ -1,5 +1,7 @@
 # 4.4 從候選到重排
 
+[← 上一頁](03-dense-retrieval.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](05-rag.md)
+
 ## 學習目標
 
 讀完本節後，你應該能：
@@ -256,4 +258,4 @@ Y 被兩個系統都排在前兩名（A 第 2、B 第 1），綜合表現最穩�
 
 ---
 
-[章節導覽](intro.md) · [上一節](03-dense-retrieval.md) · [下一節](05-rag.md)
+[← 上一頁](03-dense-retrieval.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](05-rag.md)

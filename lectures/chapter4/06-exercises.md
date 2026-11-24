@@ -1,5 +1,7 @@
 # 4.6 習題與整合練習
 
+[← 上一頁](05-rag.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](../chapter5/intro.md)
+
 本節包含五道綜合習題，涵蓋 BM25 / RRF 手算、指標計算、dense retrieval 選型、RAG 管線偵錯，以及一個偵錯流程圖。
 
 ---
@@ -203,4 +205,4 @@ RAG 回答錯誤
 
 ---
 
-[章節導覽](intro.md) · [上一節](05-rag.md)
+[← 上一頁](05-rag.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](../chapter5/intro.md)

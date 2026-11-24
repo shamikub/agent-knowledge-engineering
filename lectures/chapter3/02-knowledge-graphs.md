@@ -1,6 +1,6 @@
 # 3.2 把關係存起來再查（Knowledge Graphs）
 
-[章節導覽](intro.md) · [上一節](01-decision-tables.md) · [下一節](03-bitemporal-modeling.md)
+[← 上一頁](01-decision-tables.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](03-bitemporal-modeling.md)
 
 ---
 
@@ -441,4 +441,4 @@ trip:dep3 a trip:Dependency ;
 
 ---
 
-[章節導覽](intro.md) · [上一節](01-decision-tables.md) · [下一節](03-bitemporal-modeling.md)
+[← 上一頁](01-decision-tables.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](03-bitemporal-modeling.md)

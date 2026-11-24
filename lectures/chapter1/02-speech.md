@@ -1,5 +1,7 @@
 # 1.2 語音轉文字與說話者識別
 
+[← 上一頁](01-documents.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](03-ui-operations.md)
+
 ## 學習目標
 
 完成本節後，你應能：
@@ -256,4 +258,4 @@ DER（Speaker Error 部分）= 8 / 20 = 0.40（40%）
 
 ---
 
-[章節導覽](intro.md) · [上一節](01-documents.md) · [下一節](03-ui-operations.md)
+[← 上一頁](01-documents.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](03-ui-operations.md)

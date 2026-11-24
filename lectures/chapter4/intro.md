@@ -1,6 +1,8 @@
 # 資訊檢索與 RAG
 
-[課程首頁](../../README.md) · [Lab 04](../../labs/04/README.md)
+[← 上一頁](../chapter3/03-bitemporal-modeling.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](01-why-retrieval.md)
+
+[本章 Lab](../../labs/04/README.md)
 
 ## 本章小節
 
@@ -25,3 +27,5 @@
 - **先讀**：Lucene BM25Similarity、SPLADE vocabulary expansion、E5 query passage prefixes、ColBERT MaxSim。比較各方法在哪一層做匹配。
 - **再讀**：cross-encoder reranking、RRF rank fusion、HNSW recall latency、filtered ANN。查同一個 k 和同一批候選下如何公平比較。
 - **研究入口**：BEIR zero-shot retrieval、MIRACL zh qrels、multi-hop evidence retrieval。追查高 nDCG 是否代表主條款與例外都找齊。
+
+[← 上一頁](../chapter3/03-bitemporal-modeling.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](01-why-retrieval.md)

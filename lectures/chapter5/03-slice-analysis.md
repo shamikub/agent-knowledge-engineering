@@ -1,5 +1,7 @@
 # 5.3 切片分析：找出系統的弱點
 
+[← 上一頁](02-oracle-ablation.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](04-calibration-and-abstention.md)
+
 ## 學習目標
 
 完成本節後，你能夠：
@@ -274,4 +276,4 @@
 
 ---
 
-[章節導覽](intro.md) · [上一節](02-oracle-ablation.md) · [下一節](04-calibration-and-abstention.md)
+[← 上一頁](02-oracle-ablation.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](04-calibration-and-abstention.md)

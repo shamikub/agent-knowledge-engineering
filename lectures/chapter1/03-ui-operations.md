@@ -1,5 +1,7 @@
 # 1.3 操作錄製與使用者行為捕捉
 
+[← 上一頁](02-speech.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](04-process-mining.md)
+
 ## 學習目標
 
 完成本節後，你應能：
@@ -272,4 +274,4 @@ rrweb 在錄製開始時做一次 full snapshot，之後只記錄增量 mutation
 
 ---
 
-[章節導覽](intro.md) · [上一節](02-speech.md) · [下一節](04-process-mining.md)
+[← 上一頁](02-speech.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](04-process-mining.md)

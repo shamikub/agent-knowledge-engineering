@@ -1,5 +1,7 @@
 # 2.3 弱監督標注
 
+[← 上一頁](02-ner-and-events.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](04-expert-review.md)
+
 ## 學習目標
 
 完成本節後，你能夠：
@@ -356,4 +358,4 @@ def lf_B(x):
 
 ---
 
-[章節導覽](intro.md) · [上一節](02-ner-and-events.md) · [下一節](04-expert-review.md)
+[← 上一頁](02-ner-and-events.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](04-expert-review.md)

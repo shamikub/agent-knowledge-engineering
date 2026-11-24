@@ -1,5 +1,7 @@
 # 5.1 一筆評估案例有哪些部分
 
+[← 上一頁](intro.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](02-oracle-ablation.md)
+
 ## 學習目標
 
 完成本節後，你能夠：
@@ -256,4 +258,4 @@ RES-2026-0847 · Hotel du Nord · 免費取消截止 2026-12-17
 
 ---
 
-[章節導覽](intro.md) · [下一節](02-error-diagnosis.md)
+[← 上一頁](intro.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](02-oracle-ablation.md)

@@ -1,6 +1,8 @@
 # 文件、語音與流程探勘
 
-[課程首頁](../../README.md) · [Lab 01](../../labs/01/README.md)
+[← 上一頁](../chapter0/intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](01-documents.md)
+
+[本章 Lab](../../labs/01/README.md)
 
 ## 本章小節
 
@@ -28,3 +30,5 @@ Alignment 把觀察軌跡對齊模型行為。Fitness 量觀察記錄能否被�
 - **先讀**：OCR reading order、LayoutLMv3 word-patch alignment、Table Transformer、GriTS。查文字辨識正確時，表格結構還可能怎麼錯。
 - **再讀**：WhisperX forced alignment、pyannote diarization error rate、rrweb incremental snapshots。比較轉錄、講者分配和操作重播可提供的證據。
 - **研究入口**：OCEL 2.0、Inductive Miner IMf、alignment-based conformance checking。用 PM4Py 查 fitness、precision 及罕見路徑的取捨。
+
+[← 上一頁](../chapter0/intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](01-documents.md)

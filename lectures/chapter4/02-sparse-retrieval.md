@@ -1,6 +1,6 @@
 # 4.2 稀疏檢索：倒排索引與 BM25
 
-[章節導覽](intro.md) · [上一節](01-why-retrieval.md) · [下一節](03-dense-retrieval.md)
+[← 上一頁](01-why-retrieval.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](03-dense-retrieval.md)
 
 ---
 
@@ -508,4 +508,4 @@ D_long（|d|=6）：
 
 ---
 
-[章節導覽](intro.md) · [上一節](01-why-retrieval.md) · [下一節](03-dense-retrieval.md)
+[← 上一頁](01-why-retrieval.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](03-dense-retrieval.md)

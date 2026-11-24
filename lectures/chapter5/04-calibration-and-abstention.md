@@ -1,5 +1,7 @@
 # 5.4 信心校準與放行門檻
 
+[← 上一頁](03-slice-analysis.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](../chapter6/intro.md)
+
 ## 學習目標
 
 完成本節後，你能夠：
@@ -277,4 +279,4 @@ Risk_D      = 7 / 100   = 7%
 
 ---
 
-[章節導覽](intro.md) · [上一節](03-slice-analysis.md)
+[← 上一頁](03-slice-analysis.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](../chapter6/intro.md)

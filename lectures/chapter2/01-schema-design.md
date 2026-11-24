@@ -1,5 +1,7 @@
 # 2.1 在抽取之前：定義你要的結構
 
+[← 上一頁](intro.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](02-ner-and-events.md)
+
 ## 學習目標
 
 完成本節後，你能夠：
@@ -446,4 +448,4 @@ class HotelCancellationPolicy(BaseModel):
 
 ---
 
-[章節導覽](intro.md) · [下一節](02-ner-and-events.md)
+[← 上一頁](intro.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](02-ner-and-events.md)

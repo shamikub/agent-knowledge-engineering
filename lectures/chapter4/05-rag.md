@@ -1,5 +1,7 @@
 # 4.5 從檢索到回答
 
+[← 上一頁](04-reranking-and-fusion.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](06-exercises.md)
+
 ## 學習目標
 
 讀完本節後，你應該能：
@@ -295,4 +297,4 @@ ALCE（Attributed Language modeling with Citation Evaluation）提供了一套�
 
 ---
 
-[章節導覽](intro.md) · [上一節](04-reranking-and-fusion.md) · [下一節](06-exercises.md)
+[← 上一頁](04-reranking-and-fusion.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](06-exercises.md)

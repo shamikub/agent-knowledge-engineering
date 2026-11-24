@@ -1,6 +1,8 @@
 # 知識表示、版本與壓縮
 
-[課程首頁](../../README.md) · [Lab 03](../../labs/03/README.md)
+[← 上一頁](../chapter2/04-expert-review.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](01-decision-tables.md)
+
+[本章 Lab](../../labs/03/README.md)
 
 ## 本章小節
 
@@ -27,3 +29,5 @@ Bitemporal 記 valid time 與 transaction time。例如取消政策 4/1 起有�
 - **先讀**：DMN hit policies、FEEL null semantics、SHACL closed shapes、SPARQL property paths。沿著同一筆入住案例比較表格、約束與圖查詢。
 - **再讀**：W3C PROV-O wasDerivedFrom、bitemporal valid time transaction time、recursive CTE cycle detection。查如何重播助理在某天能看到的版本。
 - **研究入口**：RAPTOR hierarchical retrieval、LongLLMLingua context compression、fact retention。查如何在相同 token 預算下比較例外條件保留率。
+
+[← 上一頁](../chapter2/04-expert-review.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](01-decision-tables.md)

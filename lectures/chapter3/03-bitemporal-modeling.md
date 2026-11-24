@@ -1,6 +1,6 @@
 # 3.3 版本的兩個時鐘（Bitemporal Modeling）
 
-[章節導覽](intro.md) · [上一節](02-knowledge-graphs.md) · [下一節](04-compression.md)
+[← 上一頁](02-knowledge-graphs.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](../chapter4/intro.md)
 
 ---
 
@@ -394,4 +394,4 @@ WHERE route_id = 'VIE-SZG'
 
 ---
 
-[章節導覽](intro.md) · [上一節](02-knowledge-graphs.md) · [下一節](04-compression.md)
+[← 上一頁](02-knowledge-graphs.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](../chapter4/intro.md)

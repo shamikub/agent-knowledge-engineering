@@ -1,6 +1,8 @@
 # 資訊萃取與低負擔校對
 
-[課程首頁](../../README.md) · [Lab 02](../../labs/02/README.md)
+[← 上一頁](../chapter1/04-process-mining.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](01-schema-design.md)
+
+[本章 Lab](../../labs/02/README.md)
 
 ## 本章小節
 
@@ -26,3 +28,5 @@ Snorkel 的 labeling functions 可以標類別或 abstain，label model 用多�
 - **先讀**：BIO tagging、linear-chain CRF、Viterbi decoding、event argument extraction。練習解釋為何實體抓對了，事件仍可能連錯。
 - **再讀**：Snorkel data programming、labeling function dependency、Query by Committee、core-set active learning。比較相同審核預算下各能發現哪些錯誤。
 - **實務入口**：Critical Decision Method、Label Studio pre-annotations、inter-annotator agreement。查怎麼設計一張讓專家快速裁定的審核卡。
+
+[← 上一頁](../chapter1/04-process-mining.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](01-schema-design.md)

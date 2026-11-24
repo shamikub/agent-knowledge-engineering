@@ -1,5 +1,7 @@
 # 2.4 以專家審核提升標注品質
 
+[← 上一頁](03-weak-supervision.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](../chapter3/intro.md)
+
 ## 學習目標
 
 完成本節後，你能夠：
@@ -339,4 +341,4 @@ print(f"Cohen's Kappa: {kappa:.3f}")
 
 ---
 
-[章節導覽](intro.md) · [上一節](03-weak-supervision.md)
+[← 上一頁](03-weak-supervision.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](../chapter3/intro.md)

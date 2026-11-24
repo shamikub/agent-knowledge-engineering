@@ -1,6 +1,6 @@
 # 4.1 為什麼不能直接把所有知識送給 LLM
 
-[章節導覽](intro.md) · [下一節](02-sparse-retrieval.md)
+[← 上一頁](intro.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](02-sparse-retrieval.md)
 
 ---
 
@@ -296,4 +296,4 @@ FAQ 文件：  50 × 400   × 1.5 =  30,000 tokens
 
 ---
 
-[章節導覽](intro.md) · [下一節](02-sparse-retrieval.md)
+[← 上一頁](intro.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](02-sparse-retrieval.md)

@@ -1,6 +1,6 @@
 # 3.1 把自然語言落成可執行規則（Decision Tables）
 
-[章節導覽](intro.md) · [下一節](02-knowledge-graphs.md)
+[← 上一頁](intro.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](02-knowledge-graphs.md)
 
 ---
 
@@ -351,4 +351,4 @@ print(evaluate(None)) # → 補充取消日期
 
 ---
 
-[章節導覽](intro.md) · [下一節](02-knowledge-graphs.md)
+[← 上一頁](intro.md) · [本章導覽](intro.md) · [總目錄](../../README.md#課程地圖) · [下一頁 →](02-knowledge-graphs.md)
