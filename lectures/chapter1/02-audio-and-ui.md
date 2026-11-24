@@ -1,9 +1,325 @@
 # 1.2 音訊與操作的事件證據
 
-Whisper 把音訊轉成 log-Mel 頻譜，編碼器形成上下文表示，解碼器根據該表示與已生成 token 逐步輸出文字。WhisperX 用 forced alignment 將轉錄字詞對上音訊區間，再與 diarization 的講者片段合併。轉錄、對齊和講者辨識要各自驗收。WER 對文字編輯距離，DER 量講者分段錯誤，決議萃取還要核對講者是否同意、否定或改口。
+## 學習目標
 
-00:10 A 說「那就先取消」，00:12 B 說「先等回信」。如果只存「取消住宿」就丟了決議仍待定的證據。存音訊區間、講者、原話與轉錄版本，候選決議另外進人工佇列。
+完成本節後，你應能：
 
-瀏覽器的 click 只證明按了按鈕，後端 booking.updated 才能驗證資料寫入。用 case ID 串起操作前狀態、動作與後端結果，區分事件發生時間與到達時間。rrweb 可重播頁面狀態，Accessibility Tree 可描述欄位和按鈕語意。資料採集先問「我要分辨哪兩種狀態」，例如送出成功和送出失敗，再決定需要哪路訊號。
+1. 描述 Whisper 與 WhisperX 的架構差異，說明強制對齊（forced alignment）的作用與輸出格式。
+2. 解釋說話者分離（speaker diarization）的輸出與轉錄合併時可能產生的錯誤，並說明應如何驗收。
+3. 比較三種操作證據來源（應用程式事件、rrweb DOM 重播、Accessibility Tree）的語意層級與適用場景。
+
+---
+
+## 任務定義
+
+### 子任務 A：語音辨識與說話者標記
+
+**輸入**：音訊檔（WAV / MP3 / M4A）或即時音訊串流
+
+**輸出**：帶時間戳與說話者標籤的逐字稿，每段記錄結構如下：
+
+```json
+{
+  "start": 10.24,
+  "end": 13.81,
+  "speaker": "SPEAKER_01",
+  "text": "那我先把八點那張退掉",
+  "word_segments": [
+    {"word": "那", "start": 10.24, "end": 10.41, "score": 0.98},
+    {"word": "我", "start": 10.41, "end": 10.56, "score": 0.97},
+    ...
+  ]
+}
+```
+
+**關鍵指標**
+
+| 指標 | 全名 | 衡量對象 |
+|------|------|----------|
+| **WER**（詞錯誤率） | Word Error Rate | 辨識出的詞序列與參考序列的編輯距離比率 |
+| **DER**（說話者錯誤率） | Diarization Error Rate | 說話者片段被錯誤分配的時間比例 |
+
+### 子任務 B：操作事件擷取
+
+**輸入**：瀏覽器錄影（DOM snapshot + event log）或應用程式後端日誌
+
+**輸出**：帶語意的操作事件序列，每筆記錄包含：
+
+```json
+{
+  "event_time": "2026-11-24T09:15:32Z",
+  "arrived_time": "2026-11-24T09:15:32.045Z",
+  "case_id": "booking_2024_paris_001",
+  "actor": "user_A",
+  "action": "booking.cancelled",
+  "target": {"booking_id": "BK001", "train": "08:00 TPE→KHH"},
+  "before_state": {"status": "confirmed"},
+  "after_state": {"status": "cancelled"}
+}
+```
+
+---
+
+## 架構說明
+
+### 語音處理三層管線
+
+```
+音訊檔
+   │
+   ▼ [層 1] 語音辨識（ASR）：Whisper
+   │  輸入：log-Mel 頻譜（80 個 Mel bin，30 秒為單位）
+   │  輸出：段落文字（無詞級時間戳）
+   │
+   ▼ [層 2] 強制對齊（Forced Alignment）：WhisperX / wav2vec2
+   │  輸入：音訊 + Whisper 轉錄文字
+   │  輸出：每個詞的 [start, end, score]
+   │
+   ▼ [層 3] 說話者分離（Diarization）：pyannote.audio
+      輸入：音訊
+      輸出：說話者片段清單 [start, end, speaker_id]
+      合併：以詞的時間戳對齊說話者片段，決定每個詞屬於哪位說話者
+```
+
+### Whisper vs WhisperX 核心差異
+
+**Whisper**（OpenAI，2022）
+- 編碼器：Transformer，輸入 log-Mel 頻譜
+- 解碼器：自迴歸（autoregressive），逐 token 生成
+- 輸出：段落層級時間戳（每個段落一個 start/end）
+- 限制：無詞級時間戳；無說話者資訊
+
+**WhisperX**（Bain et al., 2023，[arXiv:2303.00747](https://arxiv.org/abs/2303.00747)）
+- 以 Whisper 做初步轉錄
+- 以 wav2vec2 / phoneme 模型做**強制對齊**，將每個詞對到音訊時間軸
+- 再以 pyannote.audio 做說話者分離，合併詞級時間與說話者片段
+- 輸出：詞級時間戳 + 說話者標籤
+
+### 三種操作證據來源
+
+| 來源 | 語意層級 | 優點 | 缺點 |
+|------|----------|------|------|
+| **應用程式事件**（後端 API / webhook） | 業務語意（如 `booking.updated`） | 直接反映資料狀態變更；有 before/after | 只記錄成功寫入；使用者的試探行為看不到 |
+| **rrweb DOM 重播** | UI 狀態（HTML/CSS 變化 + 滑鼠軌跡） | 可重播完整操作過程；看到「猶豫」行為 | 資料量大；需解析 DOM diff 才能取語意 |
+| **Accessibility Tree** | 介面語意（按鈕名稱、欄位標籤） | 比 DOM 層更接近使用者意圖；無障礙 API 標準化 | 不同框架實作品質不一；無法捕捉視覺樣式 |
+
+**選型原則**：先問「我需要分辨哪兩種狀態？」
+
+- 分辨「訂單送出成功 vs 失敗」→ 應用程式事件最直接
+- 分辨「使用者填完表單後猶豫取消 vs 直接送出」→ rrweb DOM 重播
+- 分辨「使用者點了哪個功能按鈕」→ Accessibility Tree
+
+---
+
+## 完整算例：字對了但說話者錯誤的反例
+
+### 情境
+
+雙人歐洲自由行，A 與 B 在討論是否取消訂位：
+
+**原始音訊片段（真實說話者）**
+
+```
+00:10–00:13  SPEAKER_A：「我退掉八點那張，改十點。」
+00:13–00:16  SPEAKER_B：「先等一下，我看看有沒有更便宜的。」
+```
+
+### WhisperX 輸出（詞級時間戳正確）
+
+```json
+[
+  {"start": 10.1, "end": 13.2, "text": "我退掉八點那張，改十點。", "speaker": "SPEAKER_A"},
+  {"start": 13.3, "end": 16.5, "text": "先等一下，我看看有沒有更便宜的。", "speaker": "SPEAKER_B"}
+]
+```
+
+此時 WER = 0（字完全正確）、說話者也對，是理想情況。
+
+### 反例：說話者分離錯誤
+
+假設 pyannote 把 00:12–00:16 那段錯誤地分配給 SPEAKER_A，合併後：
+
+```json
+[
+  {"start": 10.1, "end": 11.9, "text": "我退掉八點那張", "speaker": "SPEAKER_A"},
+  {"start": 12.0, "end": 16.5, "text": "改十點。先等一下，我看看有沒有更便宜的。", "speaker": "SPEAKER_A"}
+]
+```
+
+**只改了一個條件**（說話者分段邊界從 00:13 移到 00:12）：
+
+- WER 仍為 0：所有字都辨識正確
+- DER > 0：有約 3.5 秒被分配到錯誤說話者
+
+**後果**：知識工程師若直接用這份逐字稿判斷「誰決定取消訂位」，會誤以為 A 自說自話，看不到 B 的反對意見，導致決議「A 同意取消」——但實際上決議仍待確認。
+
+### 正確處理方式
+
+1. 存入**原始音訊區間 + 說話者 + 原話**，不直接推論決議。
+2. 說話者置信度低（DER 較高片段）的記錄，另加標記送人工佇列。
+3. 決議萃取模組需核對「另一位說話者是否有反對/改口」。
+
+---
+
+## 方法比較
+
+### Whisper vs WhisperX
+
+| 面向 | Whisper | WhisperX |
+|------|---------|----------|
+| 時間戳粒度 | 段落（sentence-level） | 詞（word-level） |
+| 說話者資訊 | 無 | 有（需 pyannote） |
+| 多說話者場景 | 轉錄混在一起 | 可分割不同說話者的台詞 |
+| 額外依賴 | 無 | wav2vec2 + pyannote（需 Hugging Face token） |
+| 推論速度 | 快（large-v3 約 20× 實時） | 稍慢（需額外對齊步驟） |
+| 適用場景 | 單一說話者錄音、無需說話者標記 | 會議錄音、訪談、多人對話 |
+
+### 操作證據三種來源的詳細比較
+
+| 面向 | 應用程式事件 | rrweb DOM 重播 | Accessibility Tree |
+|------|-------------|---------------|-------------------|
+| 資料量 | 低（結構化 JSON） | 高（DOM snapshot + delta） | 中 |
+| 語意豐富度 | 高（業務語意） | 低（需解析） | 中（元件語意） |
+| 能否看到失敗操作 | 否（只有成功寫入） | 是 | 部分 |
+| 跨平台 | 需各平台各自實作 | 僅瀏覽器 | 各平台有標準 API |
+| 典型工具 | Webhook / 後端 ORM hook | rrweb | AT-SPI（Linux）、UIA（Windows） |
+
+---
+
+## 研究與實務
+
+- **WhisperX 論文**：Bain et al., 2023，[arXiv:2303.00747](https://arxiv.org/abs/2303.00747)
+- **pyannote.audio**：Bredin et al.，說話者分離的業界標準開源工具，支援 DER 評估
+- **rrweb**：[github.com/rrweb-io/rrweb](https://github.com/rrweb-io/rrweb)，以增量 snapshot 重播完整 DOM 狀態，常用於 UX 研究與操作重現
+
+**注意**：WhisperX 需要 Hugging Face 存取 token 才能使用 pyannote 模型（`pyannote/speaker-diarization-3.1`），使用前請確認授權。
+
+---
+
+## 工具與實驗
+
+### WhisperX 基本用法
+
+```python
+import whisperx
+
+# 步驟 1：載入模型並轉錄
+model = whisperx.load_model("large-v2", device="cpu", compute_type="int8")
+audio = whisperx.load_audio("meeting.wav")
+result = model.transcribe(audio, batch_size=16)
+# result["segments"]：段落清單，含 start/end/text
+
+# 步驟 2：強制對齊（詞級時間戳）
+model_a, metadata = whisperx.load_align_model(
+    language_code=result["language"], device="cpu"
+)
+result = whisperx.align(
+    result["segments"], model_a, metadata, audio, device="cpu"
+)
+# result["word_segments"]：每個詞的 start/end/score
+
+# 步驟 3：說話者分離（需 HuggingFace token）
+diarize_model = whisperx.DiarizationPipeline(
+    use_auth_token="YOUR_HF_TOKEN", device="cpu"
+)
+diarize_segments = diarize_model(audio)
+result = whisperx.assign_word_speakers(diarize_segments, result)
+# 每個 segment 與 word 現在有 "speaker" 欄位
+```
+
+**WhisperX 實作了哪一層**：
+- 步驟 1 → Whisper 轉錄（段落時間戳）
+- 步驟 2 → wav2vec2 強制對齊（詞級時間戳）
+- 步驟 3 → pyannote.audio 說話者分離 + 合併
+
+---
+
+## 習題
+
+**習題 1（機制）**：Whisper 在輸出段落「先等一下，我看看有沒有更便宜的。」時，只給出該段落的 start=13.3、end=16.5，沒有詞級時間戳。請說明：若你想知道「更便宜」這三個字是在哪個時間點說的，WhisperX 的強制對齊步驟如何提供這個資訊？強制對齊的輸入是什麼？
+
+<details>
+<summary>解答</summary>
+
+強制對齊（forced alignment）的輸入是：
+
+1. **音訊波形**（或 log-Mel 頻譜）
+2. **已知的文字序列**（Whisper 轉錄結果）
+
+步驟：wav2vec2 等聲學模型先將音訊編碼為逐幀的音素機率，再使用**動態時間規整（DTW）**或 **CTC 路徑對齊**，強迫文字序列中每個字元（音素）對應到音訊時間軸上的某個幀，從而推算出每個詞的 start 和 end。
+
+與 Whisper 純解碼不同，強制對齊已知「正確答案是哪些字」，只需找出每個字在時間軸的位置，不需要重新預測文字，因此在已有轉錄的情況下速度較快、對齊精度較高。
+
+</details>
+
+---
+
+**習題 2（算例）**：以下是一段四人討論的 DER 計算場景。真實說話者分段（以秒為單位）：
+
+```
+0–5    SPEAKER_A
+5–10   SPEAKER_B
+10–15  SPEAKER_A
+15–20  SPEAKER_C
+```
+
+模型預測的分段：
+
+```
+0–5    SPEAKER_A   ← 正確
+5–12   SPEAKER_A   ← 錯誤（應為 B 和 A）
+12–20  SPEAKER_C   ← 部分正確
+```
+
+請計算這 20 秒錄音的**說話者錯誤時間**（以秒計），並說明 DER 的計算方式。
+
+<details>
+<summary>解答</summary>
+
+DER 的完整定義包含三種錯誤：
+
+```
+DER = (Miss + False Alarm + Speaker Error) / Total Reference Time
+```
+
+本題簡化只算 Speaker Error（說話者被分配到錯誤標籤的時間）：
+
+逐秒比對：
+- 0–5 秒：預測 A，真實 A → 正確，0 秒錯誤
+- 5–10 秒：預測 A，真實 B → **全錯**，5 秒錯誤
+- 10–12 秒：預測 A，真實 A → 正確，0 秒錯誤
+- 12–15 秒：預測 C，真實 A → **全錯**，3 秒錯誤
+- 15–20 秒：預測 C，真實 C → 正確，0 秒錯誤
+
+總說話者錯誤時間 = 5 + 3 = **8 秒**
+
+```
+DER（Speaker Error 部分）= 8 / 20 = 0.40（40%）
+```
+
+實際 DER 工具（如 pyannote）還會考慮說話者標籤的最佳匹配（Hungarian algorithm），以最小化 speaker confusion 後再計算，本題已假設標籤直接可對比。
+
+</details>
+
+---
+
+**習題 3（選型）**：你正在為一個旅遊 App 建立「使用者操作知識庫」，目標是了解使用者訂票失敗的原因。App 同時有 Web 介面（瀏覽器）和行動 App（iOS/Android）兩個端點。你有以下可選工具：後端 Webhook（訂單 API 成功/失敗事件）、rrweb（僅限 Web 端）、Accessibility Tree（iOS VoiceOver / Android TalkBack）。請說明：你會用哪種組合？各工具負責回答哪個問題？最大的資料缺口在哪裡？
+
+<details>
+<summary>解答</summary>
+
+**建議組合**：
+
+1. **後端 Webhook**（全平台）：回答「訂單最終成功還是失敗、在哪個 API 步驟失敗」。語意最清楚，是所有分析的主軸事件。
+
+2. **rrweb**（Web 端）：回答「使用者在送出前做了什麼操作、有沒有反覆修改或猶豫的行為」。可補足 Webhook 看不到的「試探性操作」。
+
+3. **Accessibility Tree**（iOS/Android）：回答「使用者在行動端點了哪個元件、填了哪個欄位」。比 rrweb 語意層高，但無法捕捉視覺樣式和微互動。
+
+**資料缺口**：rrweb 只涵蓋 Web，行動端的「試探性操作」（如多次修改日期、切換頁面後回來）無法用 Accessibility Tree 完整還原。若要覆蓋行動端，需要在 App 內埋設自訂事件（custom analytics）才能填補這個缺口。
+
+</details>
+
+---
 
 [章節導覽](intro.md) · [上一節](01-documents.md) · [下一節](03-process-mining.md)
