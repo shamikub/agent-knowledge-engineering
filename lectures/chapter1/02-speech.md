@@ -1,4 +1,4 @@
-# 1.2 音訊與操作的事件證據
+# 1.2 語音轉文字與說話者識別
 
 ## 學習目標
 
@@ -6,13 +6,12 @@
 
 1. 描述 Whisper 與 WhisperX 的架構差異，說明強制對齊（forced alignment）的作用與輸出格式。
 2. 解釋說話者分離（speaker diarization）的輸出與轉錄合併時可能產生的錯誤，並說明應如何驗收。
-3. 比較三種操作證據來源（應用程式事件、rrweb DOM 重播、Accessibility Tree）的語意層級與適用場景。
 
 ---
 
 ## 任務定義
 
-### 子任務 A：語音辨識與說話者標記
+### 子任務：語音辨識與說話者標記
 
 **輸入**：音訊檔（WAV / MP3 / M4A）或即時音訊串流
 
@@ -38,25 +37,6 @@
 |------|------|----------|
 | **WER**（詞錯誤率） | Word Error Rate | 辨識出的詞序列與參考序列的編輯距離比率 |
 | **DER**（說話者錯誤率） | Diarization Error Rate | 說話者片段被錯誤分配的時間比例 |
-
-### 子任務 B：操作事件擷取
-
-**輸入**：瀏覽器錄影（DOM snapshot + event log）或應用程式後端日誌
-
-**輸出**：帶語意的操作事件序列，每筆記錄包含：
-
-```json
-{
-  "event_time": "2026-11-24T09:15:32Z",
-  "arrived_time": "2026-11-24T09:15:32.045Z",
-  "case_id": "booking_2024_paris_001",
-  "actor": "user_A",
-  "action": "booking.cancelled",
-  "target": {"booking_id": "BK001", "train": "08:00 TPE→KHH"},
-  "before_state": {"status": "confirmed"},
-  "after_state": {"status": "cancelled"}
-}
-```
 
 ---
 
@@ -94,20 +74,6 @@
 - 以 wav2vec2 / phoneme 模型做**強制對齊**，將每個詞對到音訊時間軸
 - 再以 pyannote.audio 做說話者分離，合併詞級時間與說話者片段
 - 輸出：詞級時間戳 + 說話者標籤
-
-### 三種操作證據來源
-
-| 來源 | 語意層級 | 優點 | 缺點 |
-|------|----------|------|------|
-| **應用程式事件**（後端 API / webhook） | 業務語意（如 `booking.updated`） | 直接反映資料狀態變更；有 before/after | 只記錄成功寫入；使用者的試探行為看不到 |
-| **rrweb DOM 重播** | UI 狀態（HTML/CSS 變化 + 滑鼠軌跡） | 可重播完整操作過程；看到「猶豫」行為 | 資料量大；需解析 DOM diff 才能取語意 |
-| **Accessibility Tree** | 介面語意（按鈕名稱、欄位標籤） | 比 DOM 層更接近使用者意圖；無障礙 API 標準化 | 不同框架實作品質不一；無法捕捉視覺樣式 |
-
-**選型原則**：先問「我需要分辨哪兩種狀態？」
-
-- 分辨「訂單送出成功 vs 失敗」→ 應用程式事件最直接
-- 分辨「使用者填完表單後猶豫取消 vs 直接送出」→ rrweb DOM 重播
-- 分辨「使用者點了哪個功能按鈕」→ Accessibility Tree
 
 ---
 
@@ -161,9 +127,7 @@
 
 ---
 
-## 方法比較
-
-### Whisper vs WhisperX
+## 方法比較：Whisper vs WhisperX
 
 | 面向 | Whisper | WhisperX |
 |------|---------|----------|
@@ -174,23 +138,12 @@
 | 推論速度 | 快（large-v3 約 20× 實時） | 稍慢（需額外對齊步驟） |
 | 適用場景 | 單一說話者錄音、無需說話者標記 | 會議錄音、訪談、多人對話 |
 
-### 操作證據三種來源的詳細比較
-
-| 面向 | 應用程式事件 | rrweb DOM 重播 | Accessibility Tree |
-|------|-------------|---------------|-------------------|
-| 資料量 | 低（結構化 JSON） | 高（DOM snapshot + delta） | 中 |
-| 語意豐富度 | 高（業務語意） | 低（需解析） | 中（元件語意） |
-| 能否看到失敗操作 | 否（只有成功寫入） | 是 | 部分 |
-| 跨平台 | 需各平台各自實作 | 僅瀏覽器 | 各平台有標準 API |
-| 典型工具 | Webhook / 後端 ORM hook | rrweb | AT-SPI（Linux）、UIA（Windows） |
-
 ---
 
 ## 研究與實務
 
 - **WhisperX 論文**：Bain et al., 2023，[arXiv:2303.00747](https://arxiv.org/abs/2303.00747)
 - **pyannote.audio**：Bredin et al.，說話者分離的業界標準開源工具，支援 DER 評估
-- **rrweb**：[github.com/rrweb-io/rrweb](https://github.com/rrweb-io/rrweb)，以增量 snapshot 重播完整 DOM 狀態，常用於 UX 研究與操作重現
 
 **注意**：WhisperX 需要 Hugging Face 存取 token 才能使用 pyannote 模型（`pyannote/speaker-diarization-3.1`），使用前請確認授權。
 
@@ -303,23 +256,4 @@ DER（Speaker Error 部分）= 8 / 20 = 0.40（40%）
 
 ---
 
-**習題 3（選型）**：你正在為一個旅遊 App 建立「使用者操作知識庫」，目標是了解使用者訂票失敗的原因。App 同時有 Web 介面（瀏覽器）和行動 App（iOS/Android）兩個端點。你有以下可選工具：後端 Webhook（訂單 API 成功/失敗事件）、rrweb（僅限 Web 端）、Accessibility Tree（iOS VoiceOver / Android TalkBack）。請說明：你會用哪種組合？各工具負責回答哪個問題？最大的資料缺口在哪裡？
-
-<details>
-<summary>解答</summary>
-
-**建議組合**：
-
-1. **後端 Webhook**（全平台）：回答「訂單最終成功還是失敗、在哪個 API 步驟失敗」。語意最清楚，是所有分析的主軸事件。
-
-2. **rrweb**（Web 端）：回答「使用者在送出前做了什麼操作、有沒有反覆修改或猶豫的行為」。可補足 Webhook 看不到的「試探性操作」。
-
-3. **Accessibility Tree**（iOS/Android）：回答「使用者在行動端點了哪個元件、填了哪個欄位」。比 rrweb 語意層高，但無法捕捉視覺樣式和微互動。
-
-**資料缺口**：rrweb 只涵蓋 Web，行動端的「試探性操作」（如多次修改日期、切換頁面後回來）無法用 Accessibility Tree 完整還原。若要覆蓋行動端，需要在 App 內埋設自訂事件（custom analytics）才能填補這個缺口。
-
-</details>
-
----
-
-[章節導覽](intro.md) · [上一節](01-documents.md) · [下一節](03-process-mining.md)
+[章節導覽](intro.md) · [上一節](01-documents.md) · [下一節](03-ui-operations.md)

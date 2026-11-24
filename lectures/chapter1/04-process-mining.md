@@ -415,4 +415,4 @@ Inductive Miner 會偵測到：
 
 ---
 
-[章節導覽](intro.md) · [上一節](02-audio-and-ui.md)
+[章節導覽](intro.md) · [上一節](03-ui-operations.md)

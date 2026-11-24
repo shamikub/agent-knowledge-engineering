@@ -1,4 +1,4 @@
-# 2.2 弱標註怎麼學
+# 2.3 弱監督標注
 
 ## 學習目標
 
@@ -356,4 +356,4 @@ def lf_B(x):
 
 ---
 
-[章節導覽](intro.md) · [上一節](01-information-extraction.md) · [下一節](03-expert-review.md)
+[章節導覽](intro.md) · [上一節](02-ner-and-events.md) · [下一節](04-expert-review.md)

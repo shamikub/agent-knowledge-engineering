@@ -4,9 +4,10 @@
 
 ## 本章小節
 
-- [2.1 字詞、欄位、事件是不同層次](01-information-extraction.md)
-- [2.2 弱標註怎麼學](02-weak-supervision.md)
-- [2.3 把專家時間用在能改進系統的案件](03-expert-review.md)
+- [2.1 在抽取之前：定義你要的結構](01-schema-design.md)
+- [2.2 命名實體識別與事件抽取](02-ner-and-events.md)
+- [2.3 弱監督標注](03-weak-supervision.md)
+- [2.4 以專家審核提升標注品質](04-expert-review.md)
 
 ## Week 3 · 文字如何變成事件
 NER 找 mention，entity linking 判斷多個 mention 是否指同一個實體，事件抽取把動作、參與者、地點與時間填入 schema。用「我退掉 8 點那張，訂了 10 點」練習表示兩筆事件。CRF 可建模相鄰標籤，Transformer 用上下文表示每個 token，受限生成可強制輸出符合 schema 的 JSON。三種方法都要用 span 或欄位評估精確率和召回率。JSON 能解析，只驗證形狀。把「明天」轉日期需要發言時間與時區。

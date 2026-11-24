@@ -1,4 +1,4 @@
-# 2.1 字詞、欄位、事件是不同層次
+# 2.2 命名實體識別與事件抽取
 
 ## 學習目標
 
@@ -332,4 +332,4 @@ BOOK
 
 ---
 
-[章節導覽](intro.md) · [下一節](02-weak-supervision.md)
+[章節導覽](intro.md) · [上一節](01-schema-design.md) · [下一節](03-weak-supervision.md)

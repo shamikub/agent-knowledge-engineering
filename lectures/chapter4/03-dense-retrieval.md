@@ -1,4 +1,4 @@
-# 4.3 向量檢索從哪裡得到語意
+# 4.3 稠密檢索：向量如何表達語意
 
 ## 學習目標
 
@@ -297,4 +297,4 @@ Dot product：d₄（=10）> d₃（=1）；Cosine：d₃ = d₄ = 1.0（排名�
 
 ---
 
-[章節導覽](intro.md) · [上一節](02-bm25.md) · [下一節](04-reranking-and-fusion.md)
+[章節導覽](intro.md) · [上一節](02-sparse-retrieval.md) · [下一節](04-reranking-and-fusion.md)
